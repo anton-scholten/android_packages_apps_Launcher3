@@ -1331,6 +1331,11 @@ public class NavbarButtonsViewController implements TaskbarControllers.LoggableT
         boolean isNavbarOnRight = location.isOnLeft(mNavButtonsView.isLayoutRtl());
         DeviceProfile dp = mContext.getDeviceProfile();
         float navBarTargetStartX;
+        if (mContext.isPhoneButtonNavMode()) {
+            // Phone button nav mode (a large screen with the taskbar disabled) lays the buttons
+            // out across the whole bar, so the bubble bar placement doesn't apply.
+            return 0;
+        }
         if (!mContext.isUserSetupComplete()) {
             // Skip additional translations on the nav bar container while in SUW layout
             return 0;
